@@ -23,7 +23,8 @@ FILE NAME : yyyymmdd_hhmm_url.md (e.g. 20140309_0426_getting-started-meteor.md )
 3. Upload file to your server. Path is "approot/client/log".
 4. Start server.
 5. Access to "http://app.root/create_index".
-6. Go to "http://app.root/log/getting-started-meteor"
+6. Go to "http://app.root/".  
+If you make "20140309_0426_getting-started-meteor.md", go to "http://app.root/log/getting-started-meteor".
 
 ## Author
 Takuro Ishii ( [isitkr.org](http://isitkr.org/) )
