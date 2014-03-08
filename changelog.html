@@ -1,13 +1,95 @@
 <head>
-  <title>changelog</title>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no">
+  <meta name="viewport" content="width=device-width, maximum-scale=1.0, minimum-scale=0.5,user-scalable=yes,initial-scale=1.0">
+
+  <title>isitkr changelog</title>
+
 </head>
 
 <body>
-  {{> hello}}
+  <div class="container-fluid">
+
+    <div class="row-fluid">
+      <div class="span3">
+        {{> nav}}
+      </div>
+      <div class="span9" id="article-top" name="article-top">
+        {{> article}}
+      </div>
+    </div>
+
+    <footer class="row-fluid global-footer">
+      {{> footer}}
+    </footer>
+  </div>
 </body>
 
-<template name="hello">
-  <h1>Hello World!</h1>
-  {{greeting}}
-  <input type="button" value="Click" />
+<template name="header">
+  <h1><a href="/">isitkr changelog</a></h1>
+</template>
+
+<template name="footer">
+  <div class="span1">
+    <h5>Logger</h5>
+    <a href="http://twitter.com/isitkr">
+      <img class="img-rounded" src="http://1.gravatar.com/avatar/1574134406c224bc1752ba2fa30efdfb" alt="isitkr の Twitter プロフィール画像" />
+    </a>
+  </div>
+  <div class="span2">
+    <h5>Links</h5>
+    <ul class="unstyled">
+      <li><a href="http://twitter.com/isitkr">Twitter @isitkr</a></li>
+      <li><a href="https://github.com/takuro">GitHub</a></li>
+      <li><a href="http://www.facebook.com/takuro.ishii">Facebook</a></li>
+      <li><a href="https://google.com/+石井拓郎">Google+</a></li>
+      <li><a href="http://isitkr.tumblr.com/">Tumblr - hyaa</a></li>
+      <li><a href="http://isitkr.gehirn.ne.jp/phplab/">PHPLab</a></li>
+    </ul>
+    <small>&copy; {{year}} isitkr.org</small>
+  </div>
+</template>
+
+<template name="article">
+  {{#each log}}
+  <article>
+    {{#markdown}}{{{this.body}}}{{/markdown}}
+    <hr />
+    <footer>
+      <time>{{this.datetime}}</time>
+      - <a href="/log/{{this.url}}" class="call-article">Permalink</a>
+    </footer>
+  </article>
+  {{/each}}
+</template>
+
+<template name="nav">
+  <header class="global-header">
+    {{> header}}
+  </header>
+
+  <nav>
+    <ul class="inline">
+    {{#each history_year}}
+      <li>
+        <a href="#" class="history-log">{{this}}</a>
+      </li>
+    {{/each}}
+    </ul>
+    <hr />
+    <h5>Log : {{year}}</h5>
+    <ul class="unstyled">
+    {{#each articles}}
+      <li>
+        <a href="/log/{{this.url}}" class="call-article">{{this.title}}</a>
+      </li>
+    {{/each}}
+    </ul>
+  </nav>
 </template>

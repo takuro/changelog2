@@ -1,1 +1,51 @@
 /* CSS declarations go here */
+
+body {
+  padding-top: 0;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 100;
+}
+
+h1 {
+  font-size: 28.5px;
+}
+
+h2 {
+  font-size: 24.5px;
+}
+
+a {
+  color: #0b9afe;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #0160a2;
+  text-decoration: none;
+}
+
+nav li {
+  margin-bottom: 10px;
+}
+
+.global-header h1 {
+  font-size: 17.5px;
+  margin-bottom: 21px;
+}
+
+article h1 {
+  margin-bottom: 20px;
+}
+
+article footer{
+  color: #696969;
+  margin-top: 20px;
+  margin-bottom: 60px;
+}
+
+.global-footer {
+  margin-bottom: 30px;
+}
+
