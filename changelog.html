@@ -60,7 +60,6 @@
   {{#each log}}
   <article>
     {{#markdown}}{{{this.body}}}{{/markdown}}
-    <hr />
     <footer>
       <time>{{this.datetime}}</time>
       - <a href="/log/{{this.url}}" class="call-article">Permalink</a>
@@ -91,5 +90,6 @@
       </li>
     {{/each}}
     </ul>
+    <hr />
   </nav>
 </template>
