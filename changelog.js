@@ -10,18 +10,21 @@ if (Meteor.isClient) {
     }
   });
 
+  Meteor.subscribe('all_article');
+  Meteor.subscribe('get_log', Session.get('current_id'));
+  Meteor.subscribe('articles', Session.get('display_history'));
+
   Template.article.log = function () {
     var current_id = Session.get('current_id');
-    var articles;
     if (current_id == null) {
-      articles = Article.find({}, {sort: {datetime: -1}, limit: 5});
+      return Article.find({}, {sort: {datetime: -1}, limit: 5});
     } else {
-      articles = Article.find({url: current_id});
+      return Article.find({url: current_id});
     }
-    return articles;
   };
 
   Template.footer.year = function () {
+    Session.set('display_history', get_now_year());
     return get_now_year();
   };
 
@@ -35,7 +38,6 @@ if (Meteor.isClient) {
       year = "";
     } else if (year == null || !year.match(/^[0-9]{4}$/i)) {
       year = get_now_year();
-      Session.set('display_history', year);
     } 
     var match = new RegExp("^" + year);
     return Article.find({datetime: match}, {sort: {datetime: -1}});
@@ -101,6 +103,35 @@ if (Meteor.isServer) {
 
       return '<a href="/">index created.</a>';
     }
+  });
+
+  Meteor.publish("articles", function (year) {
+    if (year == "All") {
+      year = "";
+    } else if (year == null || !year.match(/^[0-9]{4}$/i)) {
+      year = get_now_year();
+    } 
+    var match = new RegExp("^" + year);
+    return Article.find({datetime: match}, {sort: {datetime: -1}});
+  });
+
+  Meteor.publish("all_article", function () {
+    return Article.find({}, {sort: {datetime: -1}});
+  });
+
+  Meteor.publish("get_log", function (current_id) {
+    if (current_id == null) {
+      return Article.find({}, {sort: {datetime: -1}, limit: 5});
+    } else {
+      return Article.find({url: current_id});
+    }
+  });
+
+  Article.allow({
+    insert: function(userId, doc) {
+      return true;
+    },
+    fetch: undefined
   });
 
   Meteor.startup(function () {
