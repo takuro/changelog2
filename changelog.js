@@ -86,7 +86,7 @@ if (Meteor.isServer) {
   Meteor.Router.add({
     '/create_index': function() {
 
-      var path = root + "/client/log/";
+      var path = root + "/public/log/";
       var file_list = get_filelist(path);
 
       if (file_list == null) {
@@ -168,18 +168,27 @@ if (Meteor.isServer) {
                    ":" + filename.substr(11,2);
 
     var url = filename.substr(14);
-    var url_match = /^(.+)\.md/i;
+    //var url_match = /^(.+)\.md/i;
+    var url_match = /^([^_]+)_?([^_]*)\.md/i;
     if (!url.match(url_match)) {
       return null;
     } else {
       url = RegExp.$1;
     }
 
+    var tag = String(RegExp.$2);
+    if (tag) {
+      console.log(tag);
+    } else {
+      tag = "Other";
+    }
+
     return { filename: filename, 
              datetime: datetime, 
              title: title, 
              url: url, 
-             body: data }
+             body: data,
+             tag: tag }
   }
 } /* end of isServer */
 
